@@ -11,7 +11,6 @@ source ../venv/bin/activate
 pip3 install eventlet
 pip3 install celery
 pip3 install bs4 requests flask mysql-connector redis
-pip3 install mariadb
 
 
 deactivate
