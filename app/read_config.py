@@ -1,0 +1,30 @@
+import configparser
+
+
+
+def read_config():
+	config = configparser.ConfigParser()
+	config.sections()
+
+	config.read('../configuration.ini')
+
+	print(config.sections())
+
+
+	if "mysql" not in config.sections():
+		raise AttributeError("'mysql' parameters are undefined")
+
+	if "other" not in config.sections():
+		raise AttributeError("'other' parameters are undefined")
+
+
+	mysql_password = config["mysql"]["password"] if config["mysql"]["password"] != "no" else ""
+
+	result_dict = {}
+	result_dict["mysql"] = {"login": config["mysql"]["login"], 
+							"password": mysql_password,
+							"port": config["mysql"]["port"]}
+
+	return result_dict
+
+print(read_config())

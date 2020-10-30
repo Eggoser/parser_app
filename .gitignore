@@ -1,0 +1,10 @@
+# writed by Eggoser
+
+
+# dirs
+/__pycache__
+/venv
+/.idea
+
+# files
+activate.bat
