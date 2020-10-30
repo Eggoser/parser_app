@@ -4,7 +4,7 @@ sudo touch /etc/default/celeryd
 sudo cat celery_example_config > /etc/default/celeryd
 
 
-sudo adduser celery
+sudo adduser celery_user
 
 
 wget https://github.com/celery/celery/blob/3.1/extra/generic-init.d/celeryd

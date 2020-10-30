@@ -13,8 +13,8 @@ CELERYD_OPTS="--poop=eventlet --concurrency=100"
 CELERYD_LOG_FILE="/var/log/celery/%n%I.log"
 CELERYD_PID_FILE="/var/run/celery/%n.pid"
 
-CELERYD_USER="celery"
-CELERYD_GROUP="celery"
+CELERYD_USER="celery_user"
+CELERYD_GROUP="celery_user"
 
 
 CELERY_CREATE_DIRS=1
