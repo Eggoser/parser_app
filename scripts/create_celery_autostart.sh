@@ -9,11 +9,11 @@ sudo adduser celery
 
 wget https://github.com/celery/celery/blob/3.1/extra/generic-init.d/celeryd
 chmod +x celeryd
-sudo mv celeryd /etc/init.d/
+sudo mv ./celeryd /etc/init.d/
 
 
 sudo mkdir /var/log/celery
-sudo chown -R celery: /var/log/celery
+sudo chown celery /var/log/celery
 
 
 sudo sh -x /etc/init.d/celeryd start
