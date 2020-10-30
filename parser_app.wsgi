@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/var/www/parser_app/venv/python3
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
