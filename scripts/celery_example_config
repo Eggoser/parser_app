@@ -3,12 +3,11 @@ CELERYD_NODES="main_worker"
 
 # main parameters
 CELERY_BIN="/var/www/parser_app/venv/bin/celery"
-CELERY_APP="parser_app"
-CELERYD_CHDIR="/var/www/parser_app"
+CELERYD_CHDIR="/var/www/parser_app/app"
 
 
 
-CELERYD_OPTS="--poop=eventlet --concurrency=100"
+CELERYD_OPTS="--pool=eventlet --concurrency=100"
 
 CELERYD_LOG_FILE="/var/log/celery/%n%I.log"
 CELERYD_PID_FILE="/var/run/celery/%n.pid"

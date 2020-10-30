@@ -16,7 +16,7 @@ sudo mkdir /var/log/celery
 sudo chown celery_user /var/log/celery
 
 
-sudo sh -x /etc/init.d/celeryd start
+sudo sh -x /etc/init.d/celeryd start &
 
 
 sudo update-rc.d celeryd defaults
