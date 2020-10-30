@@ -1,5 +1,5 @@
 import mysql.connector
-from read_config import read_config
+from .read_config import read_config
 
 
 ini_config = read_config()

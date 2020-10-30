@@ -3,6 +3,8 @@
 chmod +x install_packages.sh
 sudo ./install_packages.sh
 
+
+sudo rm -rf /var/www/parser_app
 sudo mkdir /var/www
 sudo mkdir /var/www/parser_app
 

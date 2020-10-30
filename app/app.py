@@ -2,8 +2,8 @@ from flask import Flask
 from celery import Celery
 import itertools
 
-from database import get_all_rows, update_many
-from main import CreateRequest
+from .database import get_all_rows, update_many
+from .main import CreateRequest
 
 CELERY_THREADS = 100
 
@@ -13,13 +13,14 @@ app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
 app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
 
 
-celery = Celery("parser_app", broker=app.config['CELERY_BROKER_URL'])
+celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
 
 
 @celery.task
 def my_background_task(big_array):
 	result = {}
+	print("task has been started")
 
 	for pk, query, brand in big_array:
 		gtin = CreateRequest(query, brand).get_ean_number()
@@ -30,6 +31,10 @@ def my_background_task(big_array):
 	update_many(result)
 
 	return
+
+@celery.task
+def print_govno():
+	print("govnooooo")
 
 
 @celery.task
@@ -51,13 +56,18 @@ def start_parsing():
 
 
 	data = get_all_rows()
+	print(len(data))
+
+	for i in range(5):
+			print_govno.delay()
 
 
-	tasks_for_one_thread = len(data) // CELERY_THREADS
-	for i in range(0, len(data), tasks_for_one_thread - 1):
-		my_background_task.delay(data[i:tasks_for_one_thread])
+	# tasks_for_one_thread = len(data) // CELERY_THREADS
+	# for i in range(0, len(data), tasks_for_one_thread - 1):
+	# 	my_background_task.delay(data[i:tasks_for_one_thread])
 
-	my_background_task.delay(list(itertools.islice(reversed(data), len(data)%CELERY_THREADS)))
+	# my_background_task.delay(list(itertools.islice(reversed(data), len(data)%CELERY_THREADS)))
+	# update_file.delay()
 
 
 
