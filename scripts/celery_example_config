@@ -3,7 +3,7 @@ CELERYD_NODES="main_worker"
 
 # main parameters
 CELERY_BIN="/var/www/parser_app/venv/bin/celery"
-CELERYD_CHDIR="/var/www/parser_app/app"
+CELERYD_CHDIR="/var/www/parser_app"
 
 
 

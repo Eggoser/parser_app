@@ -6,7 +6,7 @@ def read_config():
 	config = configparser.ConfigParser()
 	config.sections()
 
-	config.read('../configuration.ini')
+	config.read('configuration.ini')
 
 	print(config.sections())
 

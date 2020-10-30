@@ -39,35 +39,34 @@ def print_govno():
 
 @celery.task
 def update_file():
-        with open("flag_starts_file", "w") as fw:
+        with open("app/flag_starts_file", "w") as fw:
                         fw.write("0")
 
 
 @app.route("/")
 def start_parsing():
-	with open("flag_starts_file") as f:
+	with open("app/flag_starts_file") as f:
 		content = f.read()
 
 		if content == "1":
 			return "<h1>Скрипт уже был запущен</h1>"
 
-		with open("flag_starts_file", "w") as fw:
+		with open("app/flag_starts_file", "w") as fw:
 			fw.write("1")
 
 
 	data = get_all_rows()
 	print(len(data))
 
-	for i in range(5):
-			print_govno.delay()
-
 
 	# tasks_for_one_thread = len(data) // CELERY_THREADS
 	# for i in range(0, len(data), tasks_for_one_thread - 1):
-	# 	my_background_task.delay(data[i:tasks_for_one_thread])
+	# 	print(len(data[i:i+tasks_for_one_thread]))
+	# 	my_background_task.delay(data[i:i+tasks_for_one_thread])
 
+	# print(len(list(itertools.islice(reversed(data), len(data)%CELERY_THREADS))))
 	# my_background_task.delay(list(itertools.islice(reversed(data), len(data)%CELERY_THREADS)))
-	# update_file.delay()
+	update_file.delay()
 
 
 
