@@ -119,6 +119,6 @@ class CreateRequest:
 
 # testing
 
-obj = CreateRequest("SX2071")
-obj_number = obj.get_ean_number()
-print(obj_number)
+# obj = CreateRequest("SX2071")
+# obj_number = obj.get_ean_number()
+# print(obj_number)

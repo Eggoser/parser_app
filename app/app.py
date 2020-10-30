@@ -2,8 +2,8 @@ from flask import Flask
 from celery import Celery
 import itertools
 
-from .database import get_all_rows, update_many
-from .main import CreateRequest
+from database import get_all_rows, update_many
+from main import CreateRequest
 
 CELERY_THREADS = 100
 
