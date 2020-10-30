@@ -32,7 +32,7 @@ def my_background_task(big_array):
 	return
 
 
-@app.route("/start_parsing")
+@app.route("/")
 def start_parsing():
 	with open("flag_starts_file") as f:
 		content = f.read()
