@@ -16,7 +16,7 @@ db = mysql.connector.connect(
 cursor = db.cursor()
 
 
-GET_REQUEST = "SELECT sku, brand FROM ax_product WHERE gtin is NULL"
+GET_REQUEST = "SELECT id, sku, brand FROM ax_product WHERE gtin is NULL"
 
 
 def get_all_rows():
@@ -26,3 +26,9 @@ def get_all_rows():
 	return output
 
 
+
+def update_many(raw):
+	for key, value in raw.items():
+		cursor.execute("UPDATE ax_product SET gtin={value} WHERE id={key}".format(key=key, value=value))
+
+	db.commit()

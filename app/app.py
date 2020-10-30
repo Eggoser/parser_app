@@ -2,7 +2,7 @@ from flask import Flask
 from celery import Celery
 import itertools
 
-from .database import get_all_rows
+from .database import get_all_rows, update_many
 from .main import CreateRequest
 
 CELERY_THREADS = 100
@@ -19,7 +19,15 @@ celery.conf.update(app.config)
 
 @celery.task
 def my_background_task(big_array):
-	
+	result = {}
+
+	for pk, query, brand in big_array:
+		gtin = CreateRequest(query, brand).get_ean_number()
+		if gtin:
+			result[pk] = gtin
+
+
+	update_many(result)
 
 	return
 
