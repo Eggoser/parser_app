@@ -19,6 +19,6 @@ sudo ./create_celery_autostart.sh
 
 
 sudo a2enconf parser_app
-sudo a2enconf wsgi
+sudo a2enmod wsgi
 
 sudo service apache2 restart 

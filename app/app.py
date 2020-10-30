@@ -32,6 +32,12 @@ def my_background_task(big_array):
 	return
 
 
+@celery.task
+def update_file():
+        with open("flag_starts_file", "w") as fw:
+                        fw.write("0")
+
+
 @app.route("/")
 def start_parsing():
 	with open("flag_starts_file") as f:
@@ -41,7 +47,7 @@ def start_parsing():
 			return "<h1>Скрипт уже был запущен</h1>"
 
 		with open("flag_starts_file", "w") as fw:
-			fw.write("0")
+			fw.write("1")
 
 
 	data = get_all_rows()
