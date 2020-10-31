@@ -72,7 +72,7 @@ def start_parsing():
 	start = 0
 
 	while all_tasks - step > 0:
-		my_background_task(data[start:start+step])
+		my_background_task.delay(data[start:start+step])
 
 		start += step
 		all_tasks -= step
