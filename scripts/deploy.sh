@@ -13,8 +13,8 @@ sudo cat parser_app.conf > /etc/apache2/conf-available/parser_app.conf
 sudo cp -rf ../app /var/www/parser_app/app
 sudo cp -rf ../venv /var/www/parser_app/venv
 sudo cp ../configuration.ini /var/www/parser_app/configuration.ini
-sudo cp ../parser_app.wsgi /var/www/parser_app/parser_app.py
-
+sudo cp ../parser_app.py /var/www/parser_app/parser_app.py
+sudo chmod +x /var/www/parser_app/parser_app.py
 
 chmod +x create_celery_autostart.sh
 sudo ./create_celery_autostart.sh
