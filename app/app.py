@@ -21,7 +21,7 @@ def my_background_task(big_array):
 			result[pk] = gtin
 
 		if counter % 10 == 0:
-			print(pk, query, brand)
+			print(pk, query, brand, gtin)
 
 	update_many(result)
 

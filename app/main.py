@@ -35,9 +35,10 @@ class CreateRequest:
 
 		# parsing body
 		many_flag = False
-
-		table = self.soup.find("table")
-		rows = [i for i in table.find("tbody").findAll("tr") if " ".join(i["class"]) != "brand-article"]
+		try:
+			table = self.soup.find("table")
+			rows = [i for i in table.find("tbody").findAll("tr") if " ".join(i["class"]) != "brand-article"]
+		except: return None
 		# for j in rows:
 			# print(j["class"])
 		# rows = table.findAll("tr")
