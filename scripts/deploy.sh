@@ -17,11 +17,8 @@ sudo cp ../parser_app.py /var/www/parser_app/parser_app.py
 sudo chmod +x /var/www/parser_app/parser_app.py
 sudo chown -R sergey /var/www/parser_app
 
-chmod +x create_celery_autostart.sh
-sudo ./create_celery_autostart.sh
-
 
 sudo a2enconf parser_app
 sudo a2enmod wsgi
 
-sudo service apache2 restart 
+sudo service apache2 restart
