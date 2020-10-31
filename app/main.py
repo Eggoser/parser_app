@@ -35,10 +35,12 @@ class CreateRequest:
 
 		# parsing body
 		many_flag = False
+		table = self.soup.find("table")
 		try:
-			table = self.soup.find("table")
-			rows = [i for i in table.find("tbody").findAll("tr") if " ".join(i["class"]) != "brand-article"]
-		except: return None
+			print(table.find("tbody").findAll("tr"))
+		except Exception as err:
+			print(err)
+		rows = [i for i in table.findAll("tr") if " ".join(i["class"]) != "brand-article"]
 		# for j in rows:
 			# print(j["class"])
 		# rows = table.findAll("tr")
@@ -57,7 +59,7 @@ class CreateRequest:
 			for i in rows:
 				local_brand = i.find("td", {"class": "data-cell align-middle"}).find("div").text
 
-				if local_brand == self.brand:
+				if local_brand.lower() == self.brand.lower():
 					row = i
 					break
 
@@ -75,7 +77,7 @@ class CreateRequest:
 
 		if many_flag:
 			url_prefix = url_prefix.replace("/search/product", "/part")
-
+			print(url_prefix)
 		parsed_url = "https://renix.com.ua" + url_prefix
 
 
@@ -94,10 +96,12 @@ class CreateRequest:
 
 
 		# parsing body
-		parameter_place = self.soup.find("div", {"class": "col-lg-6 table-responsive"})
-		table = parameter_place.find("table")
+		try:
+			parameter_place = self.soup.find("div", {"class": "col-lg-6 table-responsive"})
+			table = parameter_place.find("table")
 
-		rows = table.findAll("tr")
+			rows = table.findAll("tr")
+		except: return None
 
 		results = []
 

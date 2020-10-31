@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 def my_background_task(big_array):
 	result = {}
+	l = len(big_array)
 
 
 	counter = 0
@@ -20,8 +21,8 @@ def my_background_task(big_array):
 		if gtin:
 			result[pk] = gtin
 
-		if counter % 10 == 0:
-			print(pk, query, brand, gtin)
+		print(pk, query, brand, gtin, "{}/{}".format(big_array, counter))
+		counter += 1
 
 	update_many(result)
 
