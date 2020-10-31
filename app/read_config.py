@@ -8,8 +8,6 @@ def read_config():
 
 	config.read('configuration.ini')
 
-	print(config.sections())
-
 
 	if "mysql" not in config.sections():
 		raise AttributeError("'mysql' parameters are undefined")
@@ -23,4 +21,3 @@ def read_config():
 
 	return result_dict
 
-print(read_config())

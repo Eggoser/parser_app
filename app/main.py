@@ -36,18 +36,8 @@ class CreateRequest:
 		# parsing body
 		many_flag = False
 		table = self.soup.find("table")
-		try:
-			print(table.find("tbody").findAll("tr"))
-		except Exception as err:
-			print(err)
-		rows = [i for i in table.findAll("tr") if " ".join(i["class"]) != "brand-article"]
-		# for j in rows:
-			# print(j["class"])
-		# rows = table.findAll("tr")
-		# print(len(rows))
 
-		# pprint(rows)
-		# print(len(rows))
+		rows = [i for i in table.findAll("tr") if " ".join(i["class"]) != "brand-article"]
 
 
 		if len(rows) > 1:
@@ -77,7 +67,6 @@ class CreateRequest:
 
 		if many_flag:
 			url_prefix = url_prefix.replace("/search/product", "/part")
-			print(url_prefix)
 		parsed_url = "https://renix.com.ua" + url_prefix
 
 
