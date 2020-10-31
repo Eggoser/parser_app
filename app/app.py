@@ -1,5 +1,8 @@
 from flask import Flask
 from celery import Celery
+from celery.task.control import inspect
+from time import sleep
+
 import itertools
 
 from .database import get_all_rows, update_many
@@ -21,9 +24,14 @@ celery.conf.update(app.config)
 def my_background_task(big_array):
 	result = {}
 	print("task has been started")
+	print("it's len big array=", len(big_array))
+	try:
+		print(big_array[0:10])
+	except: print("except!!!!!!!!!!!")
 
 	for pk, query, brand in big_array:
 		gtin = CreateRequest(query, brand).get_ean_number()
+
 		if gtin:
 			result[pk] = gtin
 	print(len(result))
@@ -40,9 +48,15 @@ def print_govno():
 
 @celery.task
 def update_file():
-        with open("app/flag_starts_file", "w") as fw:
-                        fw.write("0")
+    with open("app/flag_starts_file", "w") as fw:
+		fw.write("0")
 
+@celery.task
+def check_queue():
+	while True:
+		obj = inspect("celery")
+		print(i.active())
+		sleep(1)
 
 @app.route("/")
 def start_parsing():
@@ -79,7 +93,7 @@ def start_parsing():
 
 	my_background_task.delay(list(itertools.islice(reversed(data), all_tasks)))
 
-	update_file.delay()
+	check_queue.delay()
 
 
 

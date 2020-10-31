@@ -16,6 +16,9 @@ sudo mkdir /var/log/celery
 sudo chown celery_user /var/log/celery
 
 
+source /var/www/parser_app/venv/bin/activate
+
+
 sudo sh -x /etc/init.d/celeryd start &
 
 

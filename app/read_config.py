@@ -14,10 +14,6 @@ def read_config():
 	if "mysql" not in config.sections():
 		raise AttributeError("'mysql' parameters are undefined")
 
-	if "other" not in config.sections():
-		raise AttributeError("'other' parameters are undefined")
-
-
 	mysql_password = config["mysql"]["password"] if config["mysql"]["password"] != "no" else ""
 
 	result_dict = {}
