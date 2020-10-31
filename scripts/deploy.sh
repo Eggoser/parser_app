@@ -15,6 +15,7 @@ sudo cp -rf ../venv /var/www/parser_app/venv
 sudo cp ../configuration.ini /var/www/parser_app/configuration.ini
 sudo cp ../parser_app.py /var/www/parser_app/parser_app.py
 sudo chmod +x /var/www/parser_app/parser_app.py
+sudo chmod 755 /var/www/parser_app/
 
 chmod +x create_celery_autostart.sh
 sudo ./create_celery_autostart.sh

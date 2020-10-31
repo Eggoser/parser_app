@@ -26,6 +26,7 @@ def my_background_task(big_array):
 		gtin = CreateRequest(query, brand).get_ean_number()
 		if gtin:
 			result[pk] = gtin
+	print(len(result))
 
 
 	update_many(result)
@@ -59,13 +60,25 @@ def start_parsing():
 	print(len(data))
 
 
-	# tasks_for_one_thread = len(data) // CELERY_THREADS
-	# for i in range(0, len(data), tasks_for_one_thread - 1):
-	# 	print(len(data[i:i+tasks_for_one_thread]))
+	step = len(data) // (CELERY_THREADS - 1)
+	# for i in range(0, len(data), tasks_for_one_thread):
+	# 	# print(len(data[i:i+tasks_for_one_thread]))
 	# 	my_background_task.delay(data[i:i+tasks_for_one_thread])
 
-	# print(len(list(itertools.islice(reversed(data), len(data)%CELERY_THREADS))))
+	# # print(len(list(itertools.islice(reversed(data), len(data)%CELERY_THREADS))))
 	# my_background_task.delay(list(itertools.islice(reversed(data), len(data)%CELERY_THREADS)))
+
+	all_tasks = len(data)
+	start = 0
+
+	while all_tasks - step > 0:
+		my_background_task(data[start:start+step])
+
+		start += step
+		all_tasks -= step
+
+	my_background_task.delay(list(itertools.islice(reversed(data), all_tasks)))
+
 	update_file.delay()
 
 

@@ -112,6 +112,7 @@ class CreateRequest:
 			for i, k in results:
 				if "ean" in i or "gtin" in i:
 					return k
+			return [0][1]
 		elif len(results) == 1:
 			return results[0][1]
 		return None

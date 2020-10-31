@@ -20,6 +20,6 @@ sudo sh -x /etc/init.d/celeryd start &
 
 
 sudo update-rc.d celeryd defaults
-sudo service celeryd start
+sudo service celeryd restart
 
 
