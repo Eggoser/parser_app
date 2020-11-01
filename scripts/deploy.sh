@@ -23,4 +23,4 @@
 
 # sudo service apache2 restart
 
-sudo cp ./
+sudo cp ./parser_app.service /etc/systemd/system/parser_app.service

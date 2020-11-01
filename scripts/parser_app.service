@@ -3,12 +3,9 @@ Description=parser_app_service
 After=network.target
 
 [Service]
-User=user
-Group=nginx
-EnveronmentFile="parser_app.var"
-WorkingDirectory=${WORK_DIRECTORY}
-Environment="PATH=${WORK_DIRECTORY}/venv/bin"
-ExecStart=${WORK_DIRECTORY}/venv/bin/gunicorn --bind 0.0.0.0:${PORT} parser_app:application
+WorkingDirectory=/home/carlife/sites/brigcar.com
+Environment="PATH=/home/carlife/sites/brigcar.com/venv/bin"
+ExecStart=/home/carlife/sites/brigcar.com/venv/bin/gunicorn --bind 0.0.0.0:3334 parser_app:application
 
 [Install]
 WantedBy=multi-user.target
