@@ -6,6 +6,10 @@ from pprint import pprint
 
 regex_template_for_ean = re.compile(r"[0-9]{13}")
 
+first = re.compile(r"\/ru\/part\/[A-Za-z0-9\-\_]+\/\w+\/")
+second = re.compile(r"\/ru\/search\/product\/[A-Za-z0-9\-\_]+\/\w+\/")
+
+
 
 class ParseException(Exception):
 	pass
@@ -34,43 +38,58 @@ class CreateRequest:
 
 
 		# parsing body
-		many_flag = False
-		table = self.soup.find("table")
+		# many_flag = False
+		# table = self.soup.find("table")
 
-		rows = [i for i in table.findAll("tr") if " ".join(i["class"]) != "brand-article"]
+		# rows = [i for i in table.findAll("tr") if " ".join(i["class"]) != "brand-article"]
 
 
-		if len(rows) > 1:
-			if not self.brand:
-				raise ParseException("brand not set")
+		# if len(rows) > 1:
+		# 	if not self.brand:
+		# 		raise ParseException("brand not set")
 
-			many_flag = True
+		# 	many_flag = True
 
-			for i in rows:
-				local_brand = i.find("td", {"class": "data-cell align-middle"}).find("div").text
+		# 	for i in rows:
+		# 		local_brand = i.find("td", {"class": "data-cell align-middle"}).find("div").text
 
-				if local_brand.lower() == self.brand.lower():
-					row = i
+		# 		if local_brand.lower() == self.brand.lower():
+		# 			row = i
+		# 			break
+
+		# else:
+		# 	row = rows[0]
+
+
+		# if not many_flag:
+		# 	name_with_url = row.findAll("td")[1].find("a")
+
+		# else:
+		# 	name_with_url = row.findAll("td")[-1].find("a")
+
+		# url_prefix = name_with_url["href"]
+
+		# if many_flag:
+		# 	url_prefix = url_prefix.replace("/search/product", "/part")
+		
+		p1 = first.findall(self.data)
+		if not p1:
+			p2 = second.findall(self.data)
+			for i in p2:
+				test_brand, test_id = re.findall(r"\/ru\/search\/product\/([A-Za-z0-9\-\_]+)\/(\w+)", i)[0]
+
+				if test_brand.lower() == self.brand.lower():
+					url_prefix = "/ru/part/" + test_brand + "/" + test_id
 					break
 
 		else:
-			row = rows[0]
+			url_prefix = p1[0]
 
-
-		if not many_flag:
-			name_with_url = row.findAll("td")[1].find("a")
-
-		else:
-			name_with_url = row.findAll("td")[-1].find("a")
-
-		url_prefix = name_with_url["href"]
-
-		if many_flag:
-			url_prefix = url_prefix.replace("/search/product", "/part")
-		parsed_url = "https://renix.com.ua" + url_prefix
 
 
 		# finally
+		parsed_url = "https://renix.com.ua" + url_prefix
+		print(parsed_url)
 		self.clean_varriables()
 		self.url = str(parsed_url)
 
@@ -107,6 +126,7 @@ class CreateRequest:
 				if "ean" in i or "gtin" in i:
 					return k
 			return [0][1]
+
 		elif len(results) == 1:
 			return results[0][1]
 		return None
