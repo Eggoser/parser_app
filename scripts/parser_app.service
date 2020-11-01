@@ -3,9 +3,9 @@ Description=parser_app_service
 After=network.target
 
 [Service]
-WorkingDirectory=/home/carlife/sites/brigcar.com
-Environment="PATH=/home/carlife/sites/brigcar.com/venv/bin"
-ExecStart=/home/carlife/sites/brigcar.com/venv/bin/gunicorn --bind 0.0.0.0:3334 parser_app:application
+WorkingDirectory=/home/carlife/sites/brigcar.com/parser_app
+Environment="PATH=/home/carlife/sites/brigcar.com/parser_app/venv/bin"
+ExecStart=/home/carlife/sites/brigcar.com/parser_app/venv/bin/gunicorn --workers 2 --bind 0.0.0.0:3334 parser_app:application
 
 [Install]
 WantedBy=multi-user.target

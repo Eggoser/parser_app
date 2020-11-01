@@ -110,11 +110,3 @@ class CreateRequest:
 		elif len(results) == 1:
 			return results[0][1]
 		return None
-
-
-
-# testing
-
-# obj = CreateRequest("SX2071")
-# obj_number = obj.get_ean_number()
-# print(obj_number)

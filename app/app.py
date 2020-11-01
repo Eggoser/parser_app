@@ -21,37 +21,25 @@ def my_background_task(big_array):
 		if gtin:
 			result[pk] = gtin
 
-		if counter % 100==0:
+		if counter % 20 == 0:
 			update_many(result)
 			result = {}
 
 		counter += 1
-
-	
-
-	# with open("app/flag_starts_file", "w") as f:
-	# 	content = f.write("0")
 
 	return
 
 
 @app.route("/")
 def start_parsing():
-	# with open("app/flag_starts_file") as f:
-	# 	content = f.read()
-
-	# 	if content == "1":
-	# 		return "<h1>Скрипт уже был запущен</h1>"
-
-	# 	with open("app/flag_starts_file", "w") as fw:
-	# 		fw.write("1")
-	if threading.active_count() > 1:
+	if "parsing_task" in [i.name for i in threading.enumerate()]:
 		return "<h1>Скрипт уже был запущен</h1>"
 
 
 	data = get_all_rows()
 
 	thread = threading.Thread(target=my_background_task, args=(data,))
+	thread.name = "parsing_task"
 	thread.start()
 
 
