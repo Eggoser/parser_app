@@ -89,7 +89,6 @@ class CreateRequest:
 
 		# finally
 		parsed_url = "https://renix.com.ua" + url_prefix
-		print(parsed_url)
 		self.clean_varriables()
 		self.url = str(parsed_url)
 
