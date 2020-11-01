@@ -16,7 +16,7 @@ def get_all_rows():
 	  host="localhost",
 	  user=ini_config["mysql"]["login"],
 	  password=ini_config["mysql"]["password"],
-	  database="carlife_2",
+	  database=ini_config["mysql"]["database"],
 	)
 
 	cursor = db.cursor()
@@ -36,7 +36,7 @@ def update_many(raw):
 	  host="localhost",
 	  user=ini_config["mysql"]["login"],
 	  password=ini_config["mysql"]["password"],
-	  database="carlife_2",
+	  database=ini_config["mysql"]["database"],
 	)
 
 	cursor = db.cursor()

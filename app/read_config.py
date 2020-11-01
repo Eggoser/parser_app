@@ -17,7 +17,7 @@ def read_config():
 	result_dict = {}
 	result_dict["mysql"] = {"login": config["mysql"]["login"], 
 							"password": mysql_password,
-							"port": config["mysql"]["port"]}
+							"database": config["mysql"]["database"]}
 
 	return result_dict
 

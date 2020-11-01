@@ -21,7 +21,7 @@ def my_background_task(big_array):
 		if gtin:
 			result[pk] = gtin
 
-		if counter % 20 == 0:
+		if counter % 50 == 0:
 			update_many(result)
 			result = {}
 
