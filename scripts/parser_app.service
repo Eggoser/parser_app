@@ -5,7 +5,7 @@ After=network.target
 [Service]
 WorkingDirectory=/home/carlife/sites/brigcar.com/parser_app
 Environment="PATH=/home/carlife/sites/brigcar.com/parser_app/venv/bin"
-ExecStart=/home/carlife/sites/brigcar.com/parser_app/venv/bin/gunicorn --bind 0.0.0.0:3334 parser_app:application --timeout 10000000000
+ExecStart=/home/carlife/sites/brigcar.com/parser_app/venv/bin/python parser_app.py
 
 [Install]
 WantedBy=multi-user.target
