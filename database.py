@@ -8,10 +8,10 @@ ini_config = read_config()
 
 
 
-GET_REQUEST = "SELECT id, sku, brand FROM ax_product WHERE gtin is NULL"
+GET_REQUEST = "SELECT id, sku, brand FROM ax_product WHERE gtin is NULL limit {}"
 
 
-def get_all_rows():
+def get_all_rows(count_rows):
 	db = mysql.connector.connect(
 	  host="localhost",
 	  user=ini_config["mysql"]["login"],
@@ -21,7 +21,7 @@ def get_all_rows():
 
 	cursor = db.cursor()
 
-	cursor.execute(GET_REQUEST)
+	cursor.execute(GET_REQUEST.format(str(count_rows)))
 	output = cursor.fetchall()
 
 	cursor.close()
