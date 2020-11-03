@@ -21,6 +21,7 @@ try:
 				result[pk] = gtin
 			else:
 				result[pk] = "0"
+			print("id: {} gtin: {}".format(pk, gtin))
 		
 		update_many(result)
 
