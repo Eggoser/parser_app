@@ -5,22 +5,6 @@ from .main import CreateRequest
 ROWS_PER_CYCLE = 50
 
 
-def my_background_task(big_array):
-	result = {}
-	l = len(big_array)
-
-
-	counter = 0
-	
-
-		if counter % 50 == 0:
-			
-
-		counter += 1
-
-	return
-
-
 try:
 	while True:
 		data = get_all_rows(ROWS_PER_CYCLE)
