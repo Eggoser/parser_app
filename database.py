@@ -1,5 +1,5 @@
 import mysql.connector
-from .read_config import read_config
+from read_config import read_config
 
 
 ini_config = read_config()
@@ -40,9 +40,6 @@ def update_many(raw):
 	)
 
 	cursor = db.cursor()
-
-	cursor.execute(GET_REQUEST)
-	output = cursor.fetchall()
 
 	for key, value in raw.items():
 		cursor.execute("UPDATE ax_product SET gtin={value} WHERE id={key}".format(key=key, value=value))
