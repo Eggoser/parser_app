@@ -26,7 +26,7 @@ class CreateRequest:
 
 
 	def make_request(self):
-		self.response = requests.get(self.url, proxies={"https": PROXY})
+		self.response = requests.get(self.url, proxies={"https": PROXY, "http": PROXY.replace("https", "http")})
 		self.data = self.response.text
 
 		self.soup = BeautifulSoup(self.data, "html.parser")
