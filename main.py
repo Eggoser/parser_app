@@ -22,7 +22,7 @@ class CreateRequest:
 		template = "https://renix.com.ua/ru/search/?query={}"
 
 		self.url = template.format(query)
-		self.brand = brand
+		self.brand = brand.replace(" ", "-")
 
 
 	def make_request(self):
