@@ -15,7 +15,12 @@ try:
 		result = {}
 
 		for pk, query, brand in data:
-			gtin = CreateRequest(query, brand).get_ean_number()
+			try:
+				gtin = CreateRequest(query, brand).get_ean_number()
+			except KeyboardInterrupt:
+				raise KeyboardInterrupt
+			except:
+				gtin = None
 
 			if gtin:
 				result[pk] = gtin
