@@ -29,17 +29,16 @@ try:
 
 			if gtin:
 				result[pk] = gtin
+				print("[+] sku: {} brand: {} gtin: {}".format(pk, brand, gtin))
 			else:
 				result[pk] = "0"
-			print("id: {} gtin: {}".format(pk, gtin))
-		
+				print("[-] sku: {} brand: {}".format(pk, brand))
+
 		try:
 			update_many(result)
 		except DatabaseError:
 			pass
 
 
-
-
 except:
-	print("Скрипт завершил выполнение с ошибкой")
+	print("Script has been ending with error")
