@@ -1,5 +1,8 @@
 from database import get_all_rows, update_many
 from main import CreateRequest
+from requests.exceptions import ReadTimeout
+from mysql.connector.errors import DatabaseError
+
 
 
 ROWS_PER_CYCLE = 2
@@ -19,6 +22,8 @@ try:
 				gtin = CreateRequest(query, brand).get_ean_number()
 			except KeyboardInterrupt:
 				raise KeyboardInterrupt
+			except ReadTimeout:
+				continue
 			except:
 				gtin = None
 
@@ -28,7 +33,11 @@ try:
 				result[pk] = "0"
 			print("id: {} gtin: {}".format(pk, gtin))
 		
-		update_many(result)
+		try:
+			update_many(result)
+		except DatabaseError:
+			pass
+
 
 
 

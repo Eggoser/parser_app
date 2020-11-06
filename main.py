@@ -10,7 +10,9 @@ first = re.compile(r"\/ru\/part\/[A-Za-z0-9\-\_]+\/\w+\/")
 second = re.compile(r"\/ru\/search\/product\/[A-Za-z0-9\-\_]+\/\w+\/")
 
 
-PROXY = "https://VZG5oC:6mAbTJ@104.227.86.215:8000"
+# PROXY = "https://VZG5oC:6mAbTJ@104.227.86.215:8000"
+PROXY = "socks5://127.0.0.1:9050"
+TIMEOUT = 4
 
 
 class ParseException(Exception):
@@ -26,7 +28,7 @@ class CreateRequest:
 
 
 	def make_request(self):
-		self.response = requests.get(self.url, proxies={"https": PROXY, "http": PROXY.replace("https", "http")})
+		self.response = requests.get(self.url, proxies={"https": PROXY, "http": PROXY}, timeout=TIMEOUT)
 		self.data = self.response.text
 
 		self.soup = BeautifulSoup(self.data, "html.parser")

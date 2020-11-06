@@ -4,6 +4,6 @@ python3 -m virtualenv venv
 
 source venv/bin/activate
 
-pip3 install bs4 requests mysql-connector
+pip3 install bs4 requests mysql-connector pysocks
 
 deactivate
