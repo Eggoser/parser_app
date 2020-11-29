@@ -1,0 +1,11 @@
+[Unit]
+Description=parser_app_service
+After=network.target
+
+[Service]
+WorkingDirectory=/home/carlife/sites/brigcar.com/parser_app
+Environment="PATH=/home/carlife/sites/brigcar.com/parser_app/venv/bin"
+ExecStart=/home/carlife/sites/brigcar.com/parser_app/venv/bin/python app.py
+
+[Install]
+WantedBy=multi-user.target

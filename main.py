@@ -2,6 +2,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from pprint import pprint
+from exceptions import OtherError
 
 
 regex_template_for_ean = re.compile(r"[0-9]{13}")
@@ -28,8 +29,11 @@ class CreateRequest:
 
 
 	def make_request(self):
-		self.response = requests.get(self.url, proxies={"https": PROXY, "http": PROXY}, timeout=TIMEOUT)
-		self.data = self.response.text
+		try:
+			self.response = requests.get(self.url, proxies={"https": PROXY, "http": PROXY}, timeout=TIMEOUT)
+			self.data = self.response.text
+		except:
+			raise OtherError
 
 		self.soup = BeautifulSoup(self.data, "html.parser")
 

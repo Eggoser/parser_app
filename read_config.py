@@ -1,12 +1,14 @@
 import configparser
+import os
 
+filename = os.path.join(os.path.dirname(__file__), "configuration.ini")
 
 
 def read_config():
 	config = configparser.ConfigParser()
 	config.sections()
 
-	config.read('configuration.ini')
+	config.read(filename)
 
 
 	if "mysql" not in config.sections():
