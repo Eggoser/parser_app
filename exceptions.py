@@ -1,0 +1,2 @@
+class OtherError(Exception):
+	pass

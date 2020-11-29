@@ -32,6 +32,8 @@ class CreateRequest:
 		try:
 			self.response = requests.get(self.url, proxies={"https": PROXY, "http": PROXY}, timeout=TIMEOUT)
 			self.data = self.response.text
+		except KeyboardInterrupt:
+				raise KeyboardInterrupt
 		except:
 			raise OtherError
 

@@ -22,8 +22,9 @@ try:
 				gtin = CreateRequest(query, brand).get_ean_number()
 			except KeyboardInterrupt:
 				raise KeyboardInterrupt
-			except ReadTimeout:
-				continue
+			except OtherError as err:
+				with open("file.log", "a") as log:
+					log.write(str(err))
 			except:
 				gtin = None
 
