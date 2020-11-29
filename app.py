@@ -2,6 +2,7 @@ from database import get_all_rows, update_many
 from main import CreateRequest
 from requests.exceptions import ReadTimeout
 from mysql.connector.errors import DatabaseError
+from exceptions import OtherError
 
 
 

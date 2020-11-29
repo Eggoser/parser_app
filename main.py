@@ -34,8 +34,7 @@ class CreateRequest:
 			self.data = self.response.text
 		except KeyboardInterrupt:
 				raise KeyboardInterrupt
-		except:
-			raise OtherError
+
 
 		self.soup = BeautifulSoup(self.data, "html.parser")
 
@@ -69,34 +68,37 @@ class CreateRequest:
 
 
 	def get_ean_number(self):
+		
 		self.start_parsing()
 
 
 		self.make_request()
 
-
-		# parsing body
-		parameter_place = self.soup.find("div", {"class": "col-lg-6 table-responsive"})
-		table = parameter_place.find("table")
-
-		rows = table.findAll("tr")
-
-		results = []
-
-		for i in rows:
-			key, value = i.findAll("td")
-			key, value = key.text, value.text
-
-
-			if regex_template_for_ean.fullmatch(value):
-				results.append([key.lower(), value])
-
-		if len(results) > 1:
-			for i, k in results:
-				if "ean" in i or "gtin" in i:
-					return k
-			return [0][1]
-
-		elif len(results) == 1:
-			return results[0][1]
-		return None
+		try:
+			# parsing body
+			parameter_place = self.soup.find("div", {"class": "col-lg-6 table-responsive"})
+			table = parameter_place.find("table")
+	
+			rows = table.findAll("tr")
+	
+			results = []
+	
+			for i in rows:
+				key, value = i.findAll("td")
+				key, value = key.text, value.text
+	
+	
+				if regex_template_for_ean.fullmatch(value):
+					results.append([key.lower(), value])
+	
+			if len(results) > 1:
+				for i, k in results:
+					if "ean" in i or "gtin" in i:
+						return k
+				return [0][1]
+	
+			elif len(results) == 1:
+				return results[0][1]
+			return None
+		except:
+			return None
